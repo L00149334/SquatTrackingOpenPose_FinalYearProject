@@ -13,14 +13,16 @@ import argparse
 
 
 
-
+#This line loads the user interface (UI) file
 form_class = uic.loadUiType("openpose.ui")[0]
 
+#This is a class that reads an image and stores its name.
 class img:
     def __init__(self, img_name):
         self.img = cv2.imread(img_name)
         self.name = img_name[6: ]
 
+#This function calculates the angle between three points.
 def calculate_angle(a,b,c) -> float:
     """
     * a,b,c : Take 3 leg points to calculate the angle
@@ -37,6 +39,7 @@ def calculate_angle(a,b,c) -> float:
 
     return angle
 
+#This is a class that inherits from QMainWindow and form_class. It sets up the GUI and connects buttons to functions.
 class MyWindow(QMainWindow, form_class):
 
     def __init__(self):
