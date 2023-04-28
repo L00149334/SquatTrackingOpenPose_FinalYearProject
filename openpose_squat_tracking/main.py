@@ -196,3 +196,6 @@ if __name__ == "__main__":
     myWindow = MyWindow()
     myWindow.show()
     app.exec_()
+
+
+#'calculate_angle' took inspiration from https://github.com/francesco-mazzoni/Mini-project-Computer-Vision
