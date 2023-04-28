@@ -59,33 +59,40 @@ class MyWindow(QMainWindow, form_class):
         # initialize variables
 
     def dropdownChanged(self, index):
-        # Do something when the dropdown changes
+        #Do something when the dropdown changes
         print(f"Selected option: {self.dropdown.itemText(index)}")
-
+    
     def openInputVideoFile(self):
+        #set QFileDialog options to not use native dialog
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
+        #open a file dialog to choose a video file with .avi or .mp4 extension
         self.videopath, _ = QFileDialog.getOpenFileName(self, 'Open file', '', "Video files (*.avi *.mp4)")
 
-
+        #if a video path is selected, set the import text to the path
         if self.videopath:
             self.m_strimport.setText(self.videopath)
+        # otherwise, set the video path to 0 (default)    
         else:
             self.videopath = 0
             
  
     def process(self):
         print("Start")
+        #if no video path is selected, set video_path to 0 (default)
         if self.videopath == "":
             video_path = 0
-            
+        #otherwise, set video_path to the selected video path    
         else:
             video_path = self.videopath
                 # Windows Import(YOU HAVE TO CHANGE FOLDER WITH YOUR OPENPOSE PATH)
         sys.path.append('C:/Users/hawnc/OneDrive/Documents/openpose/build/python/openpose/Release/')
+        #set openpose path for Windows
         os.environ['PATH']  = os.environ['PATH'] + ';'  + 'C:/Users/hawnc/OneDrive/Documents/openpose/build/python/openpose/Release;' + 'C:/Users/hawnc/OneDrive/Documents/openpose/build/bin;'
+        # import pyopenpose library
         import pyopenpose as op
 
+        #set argparse for image and video paths
         parser = argparse.ArgumentParser()
         parser.add_argument("--image_path", default="test.png", help="Process an image. Read all standard formats (jpg, png, bmp, etc.).")
         parser.add_argument("--video_path", default="test.mp4", help="Pass the path of video or pass 0 for the live feed.",type=str)
